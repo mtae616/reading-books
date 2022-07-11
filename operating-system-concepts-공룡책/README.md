@@ -21,4 +21,4 @@
 | 11. 대용량 저장장치 구조 | <a href="https://liltdevs.tistory.com/94">Mass-Storage Structure                                                                                                                                                                                                                                                                                                       | 491 ~ 534 | 22-06-06 |
 | 12. 입출력 시스템        | <a href="https://liltdevs.tistory.com/100">I/O System</a>                                                                                                                                                                                                                                                                                                              | 536 ~ 579 | 22-06-07 |
 | 13. 파일 시스템 인터페이스 | <a href="https://liltdevs.tistory.com/102">File-System Interfa ce</a> | | 22-06-14 |
-| 13. 파일 시스템 구현 | <a href="https://liltdevs.tistory.com/104">Implementing File-System</a> | | 22-06-21 |
+| 14. 파일 시스템 구현 | <a href="https://liltdevs.tistory.com/104">Implementing File-System</a> | | 22-06-21 |
