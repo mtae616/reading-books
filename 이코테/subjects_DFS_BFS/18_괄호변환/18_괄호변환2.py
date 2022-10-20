@@ -1,0 +1,5 @@
+def solution():
+	
+	return
+
+solution("(()())()")
