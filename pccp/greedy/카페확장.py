@@ -1,36 +1,27 @@
-# 0초에 손님 한 명
-# 정확히 k 초마다 새로운 손님
-# 주문 받은 순서대로 -> 한 번에 한 개
-# 손님은 받으면 바로 나가고, 다 만들면 다음 음료, 모든 음료는 만드는 시간 동일
-# 동시에 최대 몇명
-# 먼저 퇴장 -> 입장
-# 0 : 5, 1 : 12, 2 : 30
+# TODO : 다음에 다시 풀어보기
 
 from collections import deque
 
 def solution(menu, order, k):
-    answer = 1
+    answer = 0
+    lst = [0] * len(order)
+            # enque, deque, start
+    lst[0] = (0, menu[order[0]], 0)
+    for i in range(1, len(order)):
+        lst[i] = (k * i, menu[order[i]], lst[i - 1][2] + lst[i - 1][1])
 
-    q = deque()
-    q.append((0, order[0]))
     t = 0
-    idx = 0
-    while idx < len(order):
-        if not q:
-            start, m = t, order[idx]
-        else:
-            start, m = q[0]
-        if t - start == menu[m]:
+    q = deque()
+    q.append(lst[0])
+    i = 1
+    while i < len(lst):
+        if q and t - q[0][2] >= q[0][1]:
             q.popleft()
-        if idx + 1 < len(order) and t == (idx + 1) * k:
-            idx += 1
-            if not q:
-                buf = t + menu[order[idx]]
-            else:
-                buf = q[-1][0] + menu[q[-1][1]]
-            q.append((buf, order[idx]))
-        answer = max(answer, len(q))
+        if lst[i][0] == t:
+            q.append(lst[i])
+            i += 1
         t += 1
+        answer = max(answer, len(q))
     return answer
 
-solution([5, 12, 30], [1, 2, 0, 1]	, 10)
+solution([5, 12, 30], [2, 1, 0, 0, 0, 1, 0], 100)
