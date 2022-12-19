@@ -1,0 +1,67 @@
+# Collections Framework
+
+- 데이터 군을 저장하는 클래스들을 표준화한 설계
+- Collection -> 다수의 데이터 (데이터 그룹)
+- Framework -> 표준화된 프로그래밍 방식
+- 필자각주 : 자료구조를 OOP로 설계
+
+
+## 핵심 인터페이스
+
+- List
+  - Vector
+    - Stack
+  - ArrayList
+  - LinkedList
+- Set
+  - HashSet
+  - SortedSet
+    - TreeSet
+- Map
+  - HashTable
+  - HashMap
+    - LinkedHashMap
+  - SortedMap
+    - TreeMap
+- Iterator
+  - ListIterator
+    - Iterator 구버전
+  - Enumeration
+    - Iterator 기능 향상
+    - 양방향으로 이동 가능(전으로 이동)
+  - 컬렉션에 저장된 요소를 접근하는데 사용
+- 참고
+  - parallel... 으로 시작하는 함수를 병렬처리
+  - Comparable : 기본 정렬기준을 구현하는데 사용
+  - Comparator : 기본 정렬기준 외에 다른 기준으로 정렬하고자할 때 사
+- 컬렉션의 동기화
+  - 데이터 일관성을 유기하기 위해 사용
+  - synchronizedList
+  - synchronizedSet
+  - synchronizedMap
+  - synchronizedSortedSet
+  - synchronizedSortedMap
+- 변경 불가한 컬렉션
+  - 데이터를 읽기 전용으로 만들 때
+  - unmodifiableList
+  - unmodifiableSet
+  - unmodifiableMap
+  - unmodifiableNavigableSet
+  - unmodifiableSortedSet
+  - unmodifiableNavigableMap
+  - unmodifiableSortedMap
+- 싱글톤 컬렉션
+  - 하나의 객체만을 저장 
+  - singletonList
+  - singleton
+  - singletonMap
+- 한 종류의 객체만 저장하는 컬렉션
+  - 컬렉션에 지정된 종류의 객체만 저장
+  - checkedList
+  - checkedSet
+  - checkedMap
+  - checkedQueue
+  - checkedNavigableSet
+  - checkedSortedSet
+  - checkedNavigableMap
+  - checkedSortedMap
