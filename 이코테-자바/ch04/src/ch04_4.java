@@ -35,7 +35,6 @@ public class ch04_4 {
                 if (arr[ny][nx] == 0) {
                     x = nx;
                     y = ny;
-                    System.out.println();
                     dirCnt = 0;
                     arr[ny][nx] = 1;
                     sum += 1;
