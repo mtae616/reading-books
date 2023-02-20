@@ -3,11 +3,11 @@ import java.util.Arrays;
 import java.util.PriorityQueue;
 import java.util.Scanner;
 
-class Node implements Comparable<Node> {
+class Node2 implements Comparable<Node2> {
     private int index;
     private int distance;
 
-    public Node(int index, int distance) {
+    public Node2(int index, int distance) {
         this.index = index;
         this.distance = distance;
     }
@@ -20,25 +20,25 @@ class Node implements Comparable<Node> {
         return distance;
     }
 
+
     @Override
-    public int compareTo(Node o) {
-        if (this.distance < o.distance) return -1;
-        return 1;
+    public int compareTo(Node2 o) {
+        return 0;
     }
 }
 
 public class ch09_advancedDijkstra {
     public static final int INF = 2147483647;
     public static int n, m, start;
-    public static ArrayList<ArrayList<Node>> graph = new ArrayList<>();
+    public static ArrayList<ArrayList<Node2>> graph = new ArrayList<>();
     public static int[] d = new int[100001];
 
     public static void dijkstra(int start) {
-        PriorityQueue<Node> pq = new PriorityQueue<>();
-        pq.offer(new Node(start, 0));
+        PriorityQueue<Node2> pq = new PriorityQueue<>();
+        pq.offer(new Node2(start, 0));
         d[start] = 0;
         while (!pq.isEmpty()) {
-            Node node = pq.poll();
+            Node2 node = pq.poll();
             int dist = node.getDistance();
             int now = node.getIndex();
             if (d[now] < dist) continue;
@@ -47,12 +47,11 @@ public class ch09_advancedDijkstra {
                 int cost = d[now] + graph.get(now).get(i).getDistance();
                 if (cost < d[graph.get(now).get(i).getIndex()]) {
                     d[graph.get(now).get(i).getIndex()] = cost;
-                    pq.offer(new Node(graph.get(now).get(i).getIndex(), cost));
+                    pq.offer(new Node2(graph.get(now).get(i).getIndex(), cost));
                 }
             }
         }
     }
-
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -61,13 +60,13 @@ public class ch09_advancedDijkstra {
         start = sc.nextInt();
 
         for (int i = 0; i <= n; i++) {
-            graph.add(new ArrayList<Node>());
+            graph.add(new ArrayList<Node2>());
         }
         for (int i = 0; i < m; i++) {
             int a = sc.nextInt();
             int b = sc.nextInt();
             int c = sc.nextInt();
-            graph.get(a).add(new Node(b, c));
+            graph.get(a).add(new Node2(b, c));
         }
 
         Arrays.fill(d, INF);
