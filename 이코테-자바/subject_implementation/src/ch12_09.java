@@ -21,7 +21,6 @@ public class ch12_09 {
                     buf = now;
                     cnt = 1;
                 }
-
                 j += i;
             }
             if (cnt != 1) temp += cnt;
@@ -35,6 +34,6 @@ public class ch12_09 {
     }
 
     public static void main(String[] args) {
-        solution("a");
+        solution("aa");
     }
 }
