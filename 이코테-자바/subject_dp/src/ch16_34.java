@@ -1,0 +1,33 @@
+import java.io.*;
+import java.util.Arrays;
+import java.util.StringTokenizer;
+
+public class ch16_34 {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        int n = Integer.parseInt(br.readLine());
+        int[] arr = new int[n];
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        int k = 0;
+        while (st.hasMoreTokens()) { arr[k++] = Integer.parseInt(st.nextToken()); }
+
+        int[] dp = new int[n];
+        for(int i = 0; i < n; i++) dp[i] = 1;
+
+        for (int i = 1; i < n; i++) {
+            for (int j = 0; j < i; j++) {
+                if (arr[i] < arr[j]) {
+                    dp[i] = Math.max(dp[j] + 1, dp[i]);
+                }
+            }
+        }
+        System.out.println(n - Arrays.stream(dp).max().getAsInt());
+
+
+        bw.flush();
+        bw.close();
+        br.close();
+    }
+}
