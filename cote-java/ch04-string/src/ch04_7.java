@@ -8,7 +8,7 @@ public class ch04_7 {
                 if (idx % 2 == 1) ans.append(Character.toUpperCase(s.charAt(i)));
                 else ans.append(Character.toLowerCase(s.charAt(i)));
 
-                if (('a' <= s.charAt(i) && s.charAt(i) <= 'z') || ('A' <= s.charAt(i) && s.charAt(i) <= 'Z')) idx += 1;
+                if (Character.isAlphabetic(s.charAt(i))) idx += 1;
                 else idx = 1;
             }
             return ans.toString();
