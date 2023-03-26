@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.LinkedList;
 
 public class ch03_3 {
     static class Solution {
@@ -15,7 +16,6 @@ public class ch03_3 {
                 if (ny < 0 || nx < 0 || ny >= room.length || nx >= room[ny].length) continue;
                 if (room[ny][nx] == 'P') return true;
             }
-
             return false;
         }
 
