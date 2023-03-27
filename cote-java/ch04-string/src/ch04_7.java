@@ -1,3 +1,5 @@
+import java.util.HashMap;
+
 public class ch04_7 {
     static class Solution {
         public static String solution(String s) {
@@ -17,6 +19,11 @@ public class ch04_7 {
 
 
     public static void main(String[] args) {
-        Solution.solution("TrY HeLlO WoRlD ");
+//        Solution.solution("TrY HeLlO WoRlD ");
+
+        HashMap<String, Object> objectObjectHashMap = new HashMap<>();
+        while (true) {
+            objectObjectHashMap.put("key", new Object());
+        }
     }
 }
