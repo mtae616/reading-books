@@ -73,7 +73,7 @@
    - 필자 각주 : concurrenthashmap
 6. 가능하다면 읽기-쓰기 록 디자인 패턴을 사용하라
    - reader - writer lock
-   - 필자 각주 : ReentrantReadWriteLock
+   - 필자 각주 : ReentrantReadWriteLockT
 7. 가능하다면 읽기 전용 데이터를 사용하라
 8. 객체 풀링을 피하라
    - 객체를 pool 에 저장해서 다시 재사용 하는 것을 피하라
