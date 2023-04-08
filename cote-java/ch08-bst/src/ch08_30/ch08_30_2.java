@@ -2,7 +2,7 @@ package ch08_30;
 
 import java.util.*;
 
-public class ch08_31_2 {
+public class ch08_30_2 {
     static class Solution {
         public static Map<String, List<Integer>> map = new HashMap<>();
 
