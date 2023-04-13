@@ -5,7 +5,15 @@ import java.util.Stack;
 public class ch12_58_1_another {
     static class Solution {
 
-        private record State(int index, int acc) { }
+        static class State {
+            int index;
+            int acc;
+
+            public State(int index, int acc) {
+                this.index = index;
+                this.acc = acc;
+            }
+        }
 
         static int solution(int[] numbers, int target) {
             Stack<State> s = new Stack<>();
