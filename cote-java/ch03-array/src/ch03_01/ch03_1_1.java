@@ -1,10 +1,10 @@
-//https://school.programmers.co.kr/learn/courses/30/lessons/87377
+package ch03_01;//https://school.programmers.co.kr/learn/courses/30/lessons/87377
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ch03_1 {
+public class ch03_1_1 {
 
     static class Solution {
        static class Node{
