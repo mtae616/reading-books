@@ -1,7 +1,9 @@
+package ch05_16;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class ch05_16 {
+public class ch05_16_1 {
     static class Solution {
         private static List<int[]> hanoi(int n, int from, int to) {
             if (n == 1) return List.of(new int[]{from, to});
