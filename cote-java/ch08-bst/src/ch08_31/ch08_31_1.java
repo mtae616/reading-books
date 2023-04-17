@@ -1,4 +1,6 @@
-public class ch08_31 {
+package ch08_31;
+
+public class ch08_31_1 {
     static class Solution {
 
         public static boolean isValid(long t, int[] times, int n) {
