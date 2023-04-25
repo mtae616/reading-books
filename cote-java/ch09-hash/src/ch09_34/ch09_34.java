@@ -1,3 +1,5 @@
+package ch09_34;
+
 import java.util.HashSet;
 
 public class ch09_34 {

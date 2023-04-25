@@ -1,3 +1,5 @@
+package ch06_18;
+
 import java.util.stream.IntStream;
 
 public class ch06_18 {
