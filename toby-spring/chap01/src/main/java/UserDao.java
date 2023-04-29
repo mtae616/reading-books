@@ -3,18 +3,30 @@ import connection.NConnectionMaker;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import javax.sql.DataSource;
 import java.sql.*;
 
 public class UserDao {
 
     private ConnectionMaker connectionMaker;
+    private DataSource dataSource;
+
+    public UserDao() {
+    }
 
     public UserDao(ConnectionMaker connectionMaker) {
         this.connectionMaker = connectionMaker;
     }
 
+    public void setConnectionMaker(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
+
+
     public void add(User user) throws ClassNotFoundException, SQLException {
-        Connection c = connectionMaker.makeConnection();
+//        Connection c = connectionMaker.makeConnection();
+        Connection c = dataSource.getConnection();
 
         PreparedStatement ps = c.prepareStatement("insert into users(id, name, password) values (?, ?, ?)");
         ps.setString(1, user.getId());
@@ -28,7 +40,8 @@ public class UserDao {
     }
 
     public User get(String id) throws ClassNotFoundException, SQLException {
-        Connection c = connectionMaker.makeConnection();
+//        Connection c = connectionMaker.makeConnection();
+        Connection c = dataSource.getConnection();
 
         PreparedStatement ps = c.prepareStatement("select * from users where id = ?");
         ps.setString(1, id);
@@ -53,7 +66,7 @@ public class UserDao {
         UserDao userDao = context.getBean("userDao", UserDao.class);
 //        UserDao userDao = new DaoFactory().userDao();
         User user = new User();
-        user.setId("test1");
+        user.setId("test123");
         user.setName("test");
         user.setPassword("password");
 
