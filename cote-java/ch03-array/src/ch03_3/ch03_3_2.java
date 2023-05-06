@@ -38,6 +38,7 @@ public class ch03_3_2 {
             return true;
         }
 
+
         public static boolean waitngRoom(String[] place) {
             for (int i = 0; i < LENGTH; i++) placeMap[i] = place[i].toCharArray();
 
@@ -50,6 +51,7 @@ public class ch03_3_2 {
             }
             return true;
         }
+
         public static int[] solution(String[][] places) {
             // P 자리
             // O 빈테이블
@@ -70,43 +72,43 @@ public class ch03_3_2 {
     public static void main(String[] args) {
         Solution.solution(new String[][]{
                 {
-                "OOPOO",
-                "OPOOO",
-                "OOOOO",
-                "OOOOO",
-                "OOOOO"
+                        "OOPOO",
+                        "OPOOO",
+                        "OOOOO",
+                        "OOOOO",
+                        "OOOOO"
                 },
 
                 {
-                 "POOPX",
-                 "OXPXP",
-                 "PXXXO",
-                 "OXXXO",
-                 "OOOPP"
+                        "POOPX",
+                        "OXPXP",
+                        "PXXXO",
+                        "OXXXO",
+                        "OOOPP"
                 },
 
                 {
-                 "PXOPX",
-                 "OXOXP",
-                 "OXPOX",
-                 "OXXOP",
-                 "PXPOX"
+                        "PXOPX",
+                        "OXOXP",
+                        "OXPOX",
+                        "OXXOP",
+                        "PXPOX"
                 },
 
                 {
-                 "OOOXX",
-                 "XOOOX",
-                 "OOOXX",
-                 "OXOOX",
-                 "OOOOO"
+                        "OOOXX",
+                        "XOOOX",
+                        "OOOXX",
+                        "OXOOX",
+                        "OOOOO"
                 },
 
                 {
-                 "PXPXP",
-                 "XPXPX",
-                 "PXPXP",
-                 "XPXPX",
-                 "PXPXP"
+                        "PXPXP",
+                        "XPXPX",
+                        "PXPXP",
+                        "XPXPX",
+                        "PXPXP"
                 }
         });
     }
