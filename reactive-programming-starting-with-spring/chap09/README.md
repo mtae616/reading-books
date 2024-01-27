@@ -1,0 +1,39 @@
+# Sinks
+- Processor 는 Publisher 와 Subscriber 의 기능을 모두 가진다/
+  - Subscriber 로 기능할 땐 다른 Publisher 를 구독
+  - Publisher 로 기능할 땐 다른 Subscriber 가 구독
+  - 구현 클래스
+    - FluxProcessor
+    - MonoProcessor
+    - EmitterProcessor
+- Sinks 는 Reactor 3.4.0 버전부터 Processor 의 기능을 개선한 API
+  - Sinks are constructs through which Reactive Streams signals can be programmatically pushed, with Flux or Mono semantics. These standalone sinks expose tryEmit methods that return an Sinks.EmitResult enum, allowing to atomically fail in case the attempted signal is inconsistent with the spec and/or the state of the sink.
+  - Sinks 는 프로그래밍 방식으로 Flux 나 Mono 의 의미를 가진 Reactive Streams 신호를 푸시할 수 있는 구조체이다. 이 독립적인 Sinks 는 Sinks.EmitResult enum 을 반환하는 tryEmit 메소드를 노출한다. 이는 시도한 신호가 spec 이나 sink 의 상태와 일치하지 않는 경우에 원자적으로 실패할 수 있도록 한다.
+  - Sinks 를 사용하면 프로그래밍 코드를 통해 명시적으로 Signal 을 전송할 수 있다.
+  - signal 을 전송하는 방법
+    - `CreateOperator.java` 참고
+    - `SinkPrac.java` 참고
+      - 위의 파일에는 Sinks 에 대한 구현과 설명 (Thread Safe) 가 나와있음
+- Sinks 종류 및 특징
+  - Sinks.One 
+    - 1개의 데이터만 처리
+    - Mono 와 유사한 API 를 가진다.
+    - `SinkOnePrac.java` 참고
+  - Sinks.Many
+    - `SinkManyPrac.java` 참고
+    - Flux 와 유사한 API 를 가진다.
+    - Sinks.Many 는 3가지의 Spec 이 있음
+      - UniCastSpec
+        - 하나의 Subscriber 만 구독할 수 있음
+      - MulticastSpec
+        - 여러 Subscriber 가 구독할 수 있음
+      - MulticastReplaySpec
+        - 여러 Subscriber 가 구독할 수 있음, 새로운 구독자가 구독을 시작할 때 이전에 발생한 신호를 재생할 수 있음
+  - Summary
+    - Sinks 는 Publisher 와 Subscriber 의 기능을 모두 지닌 Processor 의 향상된 기능을 제공한다.
+    - 데이터를 emit 하는 Sinks 에는 크게 Sinks.one, Sinks.Many 가 있다.
+    - Sinks.One 은 한 건의 데이터를 프로그래밍 방식으로 emit
+    - Sinks.Many 는 여러 건의 데이터를 프로그래밍 방식으로 emit
+    - Sinks.Many 의 UnicastSpec 은 하나의 Subscriber 만 구독할 수 있음
+    - Sinks.Many 의 MulticastSpec 은 여러 Subscriber 가 구독할 수 있음
+    - Sinks.Many 의 MulticastReplaySpec 은 여러 Subscriber 가 구독할 수 있고, 새로운 구독자가 구독을 시작할 때 이전에 발생한 신호를 재생할 수 있음

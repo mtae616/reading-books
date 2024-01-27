@@ -1,0 +1,67 @@
+# Context
+- 어떠한 상황에서 그 상황을 처리하기 위해 필요한 정보
+- 예시
+  - ServletContext 는 Servlet 이 Servlet Container 와 통신하기 위해서 필요한 정보를 제공하는 인터페이스
+  - Spring Framework 에서 ApplicationContext 는 애플리케이션의 정보를 제공하는 interface
+    - spring bean
+  - SPring Security 에서 SecurityContext 는 현재 인증된 사용자의 정보를 제공하는 interface
+    - Authentication
+- Reactor Context
+  - A key/value store that is propagated between components such as operators via the context protocol
+  - propagated, 전파
+    - Downstream 에서 Upstream 으로 context 가 전파되어 Operator 체인상의 각 Operator 가 해당 Context 정보를 동일하게 이요
+  - ThreadLocal 과 다소 유사하지만 실행 스레드와 매핑되는 것이 아니라 `Subscriber` 와 매핑
+  - `구독이 발생할 때마다 해당 구독과 연결된 하나의 Context 가 생긴다`
+  - Context 에 쓰인 데이터 읽기
+    - 원본 데이터 소스 레벨에서 읽는 방식
+      - `deferContextual()` Operator
+      - `defer` 와 비슷 : 저장된 데이터와 원본 데이터 소스의 처리를 지연시킨다
+      - 람다 파라미터(ctx) 는 Context 가 아니라 ContextView, 데이터를 읽을 때는 ContextView 를 사용한다.
+    - Operator 체인의 중간에서 읽는 방식
+      - `transformDeferredContextual()` Operator
+    - context.put 을 통해 데이터를 쓴 후 매번 불변 객체를 전달함으로 thread safe 를 보장
+  - `ContextPrac.java` 참고
+
+- 자주 사용되는 Context 관련 API
+  - put(key, value)
+    - Context 에 데이터를 저장
+  - of(key, value, key2, value2, ...)
+    - Context 에 데이터를 여러개 저장
+  - putAll(ContextView)
+    - 현재 Context 와 파라미터로 입력된 ContextView 를 Merge
+  - delte(key)
+    - Context 에서 특정 데이터를 삭제
+  - `ContextPrac2.java` 참고
+- 자주 사용되는 ContextView API
+  - get(key)
+    - Context 에서 특정 데이터를 읽음
+  - getOrDefault(key)
+    - 특정 key 의 value 를 Optional 로 Wrapping 해서 반환
+  - getOrEmpty(key, defaultValue)
+    - Context 에서 특정 데이터를 읽음
+    - 데이터가 없으면 defaultValue 를 반환
+  - hasKeys()
+    - 특정 키가 존재하는지 확인
+  - isEmpty()
+    - Context 에 저장된 데이터가 없으면 true 를 반환
+  - size()
+    - Context 에 저장된 데이터의 개수를 반환
+  - `ContextPrac2.java` 참고
+- Context 특징
+  - `구독이 발생할 때마다 해당 구독과 연결된 하나의 Context 가 생긴다`
+  - `Operator 체인상의 아래에서 위로 전파된다`
+    - 따라서 key 값은 가장 위쪽에 있는 걸로 덮어씌워짐
+  - `Inner Sequence 내부에서는 외부 Context 를 읽을 수 있지만 그 역은 안됨`
+
+- Summary
+  - Reactor Context 는 `구독이 발생할 때마다 해당 구독과 연결된 하나의 Context 가 생긴다`
+    - Operator 체인에 전파되는 키와 값 형태의 저장소
+    - Subscriber 와 매핑되어 구독이 발생할 때마다 해당 구독과 연결된 하나의 Context 가 생긴다.
+    - contextWriter Operator 를 사용해서 Context 데이터 쓰기 작업을 할 수 있다.
+    - deferContextual Operator 를 사용해서 원본 데이터 소스 레벨에서 COntext 의 데이터를 읽을 수 있다.
+    - transformDeferredContextual Operator 를 사용해서 Operator 체인의 중간에서 Context 의 데이터를 읽을 수 있다.
+  - Context 는 인증 정보 같은 직교성(독립성)을 가지는 정보를 전송하는 데 적합하다
+  - `구독이 발생할 때마다 해당 구독과 연결된 하나의 Context 가 생긴다`
+  - `Operator 체인상의 아래에서 위로 전파된다`
+    - 따라서 key 값은 가장 위쪽에 있는 걸로 결정됨
+  - `Inner Sequence 내부에서는 외부 Context 를 읽을 수 있지만 그 역은 안됨`
