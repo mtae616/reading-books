@@ -2,4 +2,8 @@ rootProject.name = 'reactive-programming-starting-with-spring'
 include 'chap09'
 include 'chap10'
 include 'chap11'
+include 'chap12'
+include 'chap13'
+include 'chap14'
+include 'chap15'
 

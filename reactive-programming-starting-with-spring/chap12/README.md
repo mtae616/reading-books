@@ -1,0 +1,18 @@
+# Debugging
+- 비동기적으로 실행되므로 디버깅이 쉽지않음
+- 디버그 모드를 활성화할 수 있음
+- `DebuggingPrac.java` 참고
+- `Hooks.onOperatorDebug()` 로 debugging mode 활성화
+  - 단 이 작업은 비용이 많이 든다
+    - 애플리케이션 내에 있는 모든 Operator 의 StackTrace 를 capture
+    - 에러가 발생하면 캡쳐한 정보를 기반으로 에러가 발생한 Assembly 의 스택트레이스를 원본 스택트레이스 중간에 끼워 넣는다.
+  - 참고
+    - Assembly
+      - Operator 에서 리턴하는 새로운 Mono 또는 Flux 가 선언된 지점
+    - Traceback
+      - 에러가 발생한 Assembly 의 스택트레이스
+    - production level 에서의 debugging
+      - `compile io.projectreactor:reactor-tools` 를 추가
+      - ReactorDebugAgent 가 클래스 경로에 존재하고 `spring.reactor.debug-agent.enabled` 가 true 면 애플리케이션 시작시 ReactorDebugAgent.init() 이 자동 호출
+- checkpoint() Operator 를 사용한 디버깅
+  - `CheckpointPrac.java` 참고

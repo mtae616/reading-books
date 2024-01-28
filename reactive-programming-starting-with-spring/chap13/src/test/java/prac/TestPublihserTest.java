@@ -1,0 +1,46 @@
+package prac;
+
+import org.junit.jupiter.api.Test;
+import reactor.test.StepVerifier;
+import reactor.test.publisher.TestPublisher;
+
+import java.util.Arrays;
+import java.util.List;
+
+public class TestPublihserTest {
+    @Test
+    public void divideByTwoTest() {
+        TestPublisher<Integer> source = TestPublisher.create();
+
+        StepVerifier
+                .create(GeneralTestExample.divideByTwo(source.flux()))
+                .expectSubscription()
+                .then(() -> source.emit(2, 4, 6, 8, 10))
+                .expectNext(1, 2, 3, 4)
+                .expectError()
+                .verify();
+    }
+
+    @Test
+    public void divideByTwoTest2() {
+//        TestPublisher<Integer> source = TestPublisher.create();
+        TestPublisher<Integer> source =
+                TestPublisher.createNoncompliant(TestPublisher.Violation.ALLOW_NULL);
+
+        StepVerifier
+                .create(GeneralTestExample.divideByTwo(source.flux()))
+                .expectSubscription()
+                .then(() -> {
+                    getDataSource().stream()
+                            .forEach(data -> source.next(data));
+                    source.complete();
+                })
+                .expectNext(1, 2, 3, 4, 5)
+                .expectComplete()
+                .verify();
+    }
+
+    private static List<Integer> getDataSource() {
+        return Arrays.asList(2, 4, 6, 8, null);
+    }
+}
