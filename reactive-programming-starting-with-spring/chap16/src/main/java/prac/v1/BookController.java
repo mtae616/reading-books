@@ -39,7 +39,8 @@ public class BookController {
     @GetMapping("/{book-id}")
     public Mono<BookDto.Response> getBook(@PathVariable("book-id") long bookId) {
         Mono<Book> book = bookService.findBook(bookId);
-        return mapper.bookToBookResponse(book);
+        Mono<BookDto.Response> responseMono = mapper.bookToBookResponse(book);
+        return responseMono;
     }
 
 }

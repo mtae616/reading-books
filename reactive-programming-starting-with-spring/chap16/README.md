@@ -33,7 +33,34 @@ public Mono patchBook(@PathVariable("book-id") long bookId,
   - 각주 : `DispatcherHandler` 가 어떻게 Controller 를 구독할 수 있는지
 
 ```java
-// target
+// Annotated Controller
+// DispatcherHandler, HttpServer, ReactorNetty, ReactorHttpHandlerAdapter, DelayedInitializationHttpHandler, HttpWebHandlerAdapter, WebSocketHandlerAdapter
+public void onStateChange(Connection connection, ConnectionObserver.State newState) {
+  if (newState == HttpServerState.REQUEST_RECEIVED) {
+    try {
+      if (HttpServer.log.isDebugEnabled()) {
+        HttpServer.log.debug(ReactorNetty.format(connection.channel(), "Handler is being applied: {}"), new Object[]{this.handler});
+      }
+
+      HttpServerOperations ops = (HttpServerOperations)connection;
+      Publisher<Void> publisher = (Publisher)this.handler.apply(ops, ops);
+      Mono<Void> mono = Mono.deferContextual((ctx) -> {
+        ops.currentContext = Context.of(ctx);
+        return Mono.fromDirect(publisher);
+      });
+      if (ops.mapHandle != null) {
+        mono = (Mono)ops.mapHandle.apply(mono, connection);
+      }
+
+      mono.subscribe(ops.disposeSubscriber()); // 이 부분에서 controller subscribe
+    } catch (Throwable var6) {
+      HttpServer.log.error(ReactorNetty.format(connection.channel(), ""), var6);
+      connection.channel().close();
+    }
+  }
+
+
+// functional endpoint
 @GetMapping("/{book-id}")
 public Mono getBook(@PathVariable("book-id") long bookId) {
   return bookService.findBook(bookId)
