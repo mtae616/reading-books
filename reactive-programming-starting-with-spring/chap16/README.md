@@ -34,7 +34,7 @@ public Mono patchBook(@PathVariable("book-id") long bookId,
 
 ```java
 // Annotated Controller
-// DispatcherHandler, HttpServer, ReactorNetty, ReactorHttpHandlerAdapter, DelayedInitializationHttpHandler, HttpWebHandlerAdapter, WebSocketHandlerAdapter
+// DispatcherHandler, HttpServer, ReactorNetty, ReactorHttpHandlerAdapter, DelayedInitializationHttpHandler, HttpWebHandlerAdapter, WebSocketHandlerAdapter, HttpWebHandlerAdapter
 public void onStateChange(Connection connection, ConnectionObserver.State newState) {
   if (newState == HttpServerState.REQUEST_RECEIVED) {
     try {
