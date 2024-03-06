@@ -9,11 +9,11 @@ public class PublishOnPrac {
     public static void main(String[] args) {
         Flux.fromArray(new Integer[]{1, 3, 5, 7})
                 .doOnNext(data -> log.info("# doOnNext: {}", data))
-                .publishOn(Schedulers.parallel())
-                .filter(data -> data > 3)
+                .publishOn(Schedulers.parallel()) // 이후 연산을 수행할 스레드를 지정
+                .filter(data -> data > 3) // parallel-2
                 .doOnNext(data -> log.info("# doOnNext filtered: {}", data))
-                .publishOn(Schedulers.parallel())
-                .map(data -> data * 10)
+                .publishOn(Schedulers.parallel()) // 이후 연산을 수행할 스레드를 지정
+                .map(data -> data * 10) // parallel-1
                 .doOnNext(data -> log.info("# doOnNext mapped: {}", data))
                 .subscribe(data -> log.info("# onNext: {}", data));
 

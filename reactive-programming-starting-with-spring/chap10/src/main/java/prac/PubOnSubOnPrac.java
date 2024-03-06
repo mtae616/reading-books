@@ -8,17 +8,16 @@ import reactor.core.scheduler.Schedulers;
 public class PubOnSubOnPrac {
     public static void main(String[] args) throws InterruptedException {
         Flux.fromArray(new Integer[]{1, 3, 5, 7})
-                .doOnNext(data -> log.info("# doOnNext: {}", data))
-                .subscribeOn(Schedulers.boundedElastic())
-                .filter(data -> data > 3)
+                .doOnNext(data -> log.info("# doOnNext: {}", data)) // boundedElastic-1
+                .subscribeOn(Schedulers.boundedElastic()) // 구독이 발생한 직후 실행될 스레드를 지정
+                .filter(data -> data > 3) // boundedElastic-1, 따로 지정하지 않으면 위의 subscribeOn 스레드에서 실행
                 .doOnNext(data -> log.info("# doOnNext filtered: {}", data))
                 .publishOn(Schedulers.parallel())
-                .map(data -> data * 10)
+                .map(data -> data * 10) // 위에서 parallel 로 스레드를 변경했기 때문에 parallel-1
                 .doOnNext(data -> log.info("# doOnNext mapped: {}", data))
                 .subscribe(data -> log.info("# onNext: {}", data));
 
         Thread.sleep(500L);
-
 
 //        21:48:32.620 [boundedElastic-1] INFO prac.PubOnSubOnPrac -- # doOnNext: 1
 //        21:48:32.622 [boundedElastic-1] INFO prac.PubOnSubOnPrac -- # doOnNext: 3

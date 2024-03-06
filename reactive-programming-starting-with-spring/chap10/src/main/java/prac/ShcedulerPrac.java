@@ -18,8 +18,6 @@ public class ShcedulerPrac {
                 .publishOn(Schedulers.parallel())
                 .subscribe(data -> log.info("# onNext: {}", data));
 
-
-
         // parallel() Operator 는 병렬성을 가지는 물리적인 스레드, RR 방식으로 논리적인 코어(물리적인 스레드)를 할당, 4코어 8스레드 CPU 라면 총 8개의 스레드를 병렬로 실행
         Flux.fromArray(new Integer[] {1, 3, 5, 7, 9})
                 .parallel() // 논리적인 코어(물리적인 스레드) 수에 맞게 사전에 골고루 분배하는 역할만

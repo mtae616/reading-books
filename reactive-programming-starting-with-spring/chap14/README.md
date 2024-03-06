@@ -65,7 +65,6 @@
 <img src="./static/flatmap.png">
 
 - flatMap : Upstream 에서 emit 된 데이터가 Inner Seuqence 에서 평탄화 작업을 거치면서 하나의 Sequence 로 병합되어 Downstream 으로 emit
-  - `FlatMapPrac.java` 참고
 
 <br />
 <br />
