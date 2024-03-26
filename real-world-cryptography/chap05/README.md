@@ -1,0 +1,22 @@
+# 키 교환
+- 키 교환이란?
+  - A, B 가 각각 private, public 키를 만들어낸다.
+  - A는 B의 public 키와 자신의 private 키로 공유 비밀을 계산한다.
+  - B는 A의 public 키와 자신의 private 키로 공유 비밀을 계산한다.
+  - A, B 는 같은 비밀키 (Session Key) 를 가지게 된다
+  - 단, 세션키를 만드는 과정에서 상대방을 신뢰할 수 없다.
+- DH Key 교환
+  - 최초로 발명된 키 교환 알고리즘이며 오늘날에도 널리 사용된다.
+  - A는 개인 값 (a) 를 선택하고, 이를 기반으로 공개값(A) 를 계산 : (A = g^a mod p)
+  - B는 개인 값 (b) 를 선택하고, 이를 기반으로 공개값(B) 를 계산 : (B = g^b mod p)
+  - 여기서 g 는 base 이며, p는 prime modulus 이다.
+  - A는 B의 공개값(B) 를 받아서 공유 비밀을 계산 : (S = B^a mod p)
+  - B는 A의 공개값(A) 를 받아서 공유 비밀을 계산 : (S = A^b mod p)
+  - A, B 는 같은 비밀키 S (Session Key) 를 가지게 된다.
+  - 참고 
+    - 이때 g, p, A, B 는 공개되어도 상관없다. (공격자는 a, b 값을 알아야만 S를 알 수 있다.)
+    - g, p 는 미리 정해진 값이며, 보통 g=2, p=23 이다.
+
+- 참고
+  - <a href="https://namu.wiki/w/%EB%94%94%ED%94%BC-%ED%97%AC%EB%A7%8C%20%ED%82%A4%20%EA%B5%90%ED%99%98">디피-헬만 키 교환</a>
+  - <a href="https://tramamte.github.io/2018/07/20/diffie-hellman/">디피-헬만 키 교환</a>
